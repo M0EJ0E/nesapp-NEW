@@ -1,0 +1,39 @@
+﻿@inject GameService service
+
+<h3>TODO: PaperclipContainer UI goes here</h3>
+
+<p>You have: @service.PaperclipCount paperclips.</p>
+
+@if (service.PaperclipCount < 10)
+{
+    <p>TODO: level 1 paperclip container asset</p>
+}
+else if (service.PaperclipCount >= 10 && service.PaperclipCount < 100)
+{
+    <p>TODO: level 2 paperclip container asset</p>
+}
+else if (service.PaperclipCount >= 100 && service.PaperclipCount < 500)
+{
+    <p>TODO: level 3 paperclip container asset</p>
+}
+else if (service.PaperclipCount >= 500 && service.PaperclipCount < 1000)
+{
+    <p>TODO: level 4 paperclip container asset</p>
+}
+else
+{
+    <p>TODO: And so forth.</p>
+}
+
+@code {
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            service.ShouldRender += async () =>
+            {
+                await InvokeAsync(() => StateHasChanged());
+            };
+        }
+    }
+}

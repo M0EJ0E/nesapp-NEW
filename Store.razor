@@ -1,0 +1,28 @@
+﻿@inject GameService service
+<h3>Upgrade Store</h3>
+
+<p>Spend your paperclips here for epic upgrades.</p>
+
+@if (service.CanBuyPaperclipBox)
+{
+    <button type="button" class="nes-btn is-warning" @onclick="service.BuyPaperclipBox">Buy Box of Paperclips</button>
+}
+
+<style>
+    .disabled {
+        background-color:#808080;
+    }
+</style>
+
+@code {
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            service.ShouldRender += async () =>
+            {
+                await InvokeAsync(() => StateHasChanged());
+            };
+        }
+    }
+}

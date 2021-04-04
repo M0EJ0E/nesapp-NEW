@@ -1,0 +1,16 @@
+﻿@inject GameService service
+
+<p><b>Threat Level:</b>@service.ThreatLevel</p>
+
+@code {
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            service.ShouldRender += async () =>
+            {
+                await InvokeAsync(() => StateHasChanged());
+            };
+        }
+    }
+}

@@ -1,0 +1,33 @@
+@inherits LayoutComponentBase
+@inject GameService service
+
+<button type="button" class="nes-btn is-primary" @onclick="service.StealPaperclip">Steal Paperclip!</button>
+<hr />
+
+<ThreatMeter></ThreatMeter>
+<hr />
+<PaperclipContainer></PaperclipContainer>
+<hr />
+<PaperclipBoxContainer></PaperclipBoxContainer>
+<hr />
+<Store></Store>
+
+<style>
+    /*Global styles for site here*/
+</style>
+
+@code{
+    protected override void OnAfterRender(bool firstRender)
+    {
+        //On startup, we register against the GameService's ShouldRender delegate so that when something in the service changes,
+        //we can refresh ourself to redraw. The ShouldRender() method is called throughout GameService whenever the view needs 
+        //to be updated.
+        if (firstRender)
+        {
+            service.ShouldRender += async () =>
+            {
+                await InvokeAsync(() => StateHasChanged());
+            };
+        }
+    }
+}

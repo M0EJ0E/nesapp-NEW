@@ -1,0 +1,16 @@
+﻿@inject GameService service 
+<h3>Art for the various quantities of paperclip boxes would go here</h3>
+<p>Current # of paperclip boxes: @service.PaperclipBoxCount (+@(service.PaperclipBoxCount * GameService.PaperclipBoxBaseRatePerSecond)/s)</p>
+
+@code {
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            service.ShouldRender += async () =>
+            {
+                await InvokeAsync(() => StateHasChanged());
+            };
+        }
+    }
+}
