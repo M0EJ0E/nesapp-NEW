@@ -13,7 +13,7 @@ namespace nesapp
             _perkGenerationTask = PerkGenerationTask;
         }
 
-        public const long PaperclipBoxCost = 20;
+        public const long PaperclipBoxCost = 10;
         public const float PaperclipBoxBaseRatePerSecond = 1.0f;
         public const float ThreatLevelCooldownPerSecond = 0.97f;
         public const float ThreatLevelScalingPerSteal = 1.02f;
